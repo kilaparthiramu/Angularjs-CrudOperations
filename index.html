@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="angular.js"></script>
+    <script src="sample.js"></script>
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" style="background-color: #4db8ff;">
+  <div class="events-list page page-table">
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading">
+            <strong data-translate class="text-transform"></span>KILAPARTHI RAMU</strong>
+        </div>
+        <div style="overflow-x: auto;">
+            <table class="table table-bordered table-striped table-responsive">
+                <thead>
+                <tr class="cursor-pointer">
+                    <th nowrap><div class="th"><span data-translate>No</span></div></th>
+                    <th nowrap><div class="th"><span data-translate>Name</span></div></th>
+                    <th nowrap><div class="th"><span data-translate>Description</span></div></th>
+                    <th nowrap><div class="th"><span data-translate>Money</span> </div></th>
+                    <th nowrap><div class="th"><span data-translate>Checked</span></div></th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr class="cursor-pointer" ng-repeat="book in books">
+                     <td>{{book.no}}</td>
+                     <td>{{book.name}}
+                     </td>
+                     <td>{{book.description.description}}
+                     </td>
+                     <td>{{book.money | currency}}
+                     </td>
+                     <td>{{book.checked}}
+                     </td>
+                     <td><button type="button" class="btn btn-primary" ng-click="edit(book,$index)">Edit</button>
+                        <button type="button" class="btn btn-danger"  ng-click="removeItem($index)">Delete</button>
+                     </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+  </div>
+  <div class="events-list page page-table">
+    <section class="panel panel-default table-dynamic">
+        <div class="panel-heading">
+            <strong data-translate class="text-transform"></span>UserForm details</strong>
+        </div>
+           <div class="container">
+                  <div class="col-md-12 form-group">
+                    <label class="control-label col-sm-3">No</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="no" ng-model="model.no" numbers-only>
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label class="control-label col-sm-3">Name</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" ng-model="model.name" data-ng-disabled="true">
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label class="control-label col-sm-3">Description</label>
+                    <div class="col-sm-3">
+                        <span class="ui-select m0">
+                           <select class="col-sm-2 form-control text-transform"
+                                   ng-model="model.description"
+                                   data-ng-options="x.description for x in products | filter:{checked: model.checked}" ng-change="nameChange()">
+                               <option value=""></option>
+                           </select>
+                        </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label class="control-label col-sm-3">Money</label>
+                    <div class="col-sm-3">
+                        <p><input type="text" class="form-control" ng-model="model.money" numbers-only/></p>
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <label class="control-label col-sm-3">Checked</label>
+                    <div class="col-sm-3">
+                        <label class="i-switch m-t-6">
+                            <input type="checkbox" data-ng-click="check()"  data-ng-model="model.checked"><i></i></label>
+                    </div>
+                  </div>
+                  <div class="col-md-12 form-group pull-right">
+                    <button type="btn btn-default btn-sm " data-ng-click="add()" data-ng-if="data.edit">ADD</button>
+                    <button type="btn btn-default btn-sm " data-ng-click="update()"  data-ng-if="!data.edit">Update</button>
+                    <button type="btn btn-default btn-sm" value="clear" data-ng-click="clear()">clear</button>
+                  </div>
+              </form>
+           </div>
+    </section>
+</div>
+</div>
+</body>
+</html>
+<!--<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <alert class="alert alert-danger"
+                   data-ng-if="$scope.data.noInvalid && $scope.data.add && !$scope.model.no"
+                   close="$scope.closeAlert()" type="info">Please Select From
+                Date
+            </alert>
+        </div>
+        <div class="col-md-12">
+            <alert class="alert alert-danger"
+                   data-ng-if="$scope.data.nameInvalid && $scope.data.add && !$scope.model.name"
+                   close="$scope.closeAlert()" type="info">Please Select To Date</alert>
+        </div>
+        <div class="col-md-12">
+            <alert class="alert alert-danger"
+                   data-ng-if="$scope.data.descriptionInvalid && $scope.data.add && !$scope.data.descriptionInvalid "
+                   close="$scope.closeAlert()" type="info">Please Select Atleast
+                One Event
+            </alert>
+        </div>
+        <div class="col-md-12">
+            <alert class="alert alert-danger"
+                   data-ng-if="$scope.data.moneyInvalid  && $scope.data.run"
+                   close="$scope.closeAlert()" type="info">Please Select Atleast
+                One Pool
+            </alert>
+        </div>
+    </div>-->
